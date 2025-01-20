@@ -14,11 +14,16 @@ public class BaseTest {
 	@BeforeClass
 	public void setUp() {
 		driver = BrowserFactory.startApplication(driver, config.getBrowser(), config.getURL());
+		if (driver == null) {
+            throw new RuntimeException("WebDriver initialization failed");
+        }
 	}
 	
 	@AfterClass
 	public void teardown() {
-		BrowserFactory.quitBrowser(driver);
+		if (driver != null) {
+			BrowserFactory.quitBrowser(driver);
+        }
 	}
 	
 }

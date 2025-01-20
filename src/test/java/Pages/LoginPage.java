@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import junit.framework.Assert;
 
-public class LoginPage extends BaseTest{
+public class LoginPage{
 	
 	WebDriver driver;
 	
@@ -30,9 +30,12 @@ public class LoginPage extends BaseTest{
 	@FindBy(xpath = "//*[@id=\"alert\"]/dirv") WebElement errorMsg;
 	@FindBy(xpath = "//*[@id=\"alert\"]/dirv/button") WebElement closeBtn;
 	
-	public void LogIntoPortal(String email, String password) {
+	public void navigateToLoginPage() {
 		myAccount.click();
 		loginBtn.click();
+	}
+	
+	public void LogIntoPortal(String email, String password) {
 		emailField.sendKeys(email);
 		passwordField.sendKeys(password);
 		submitBtn.click();
@@ -42,6 +45,7 @@ public class LoginPage extends BaseTest{
 		if(scenario.equals("Success")) {
 			myAccount.click();
 			Assert.assertEquals(logoutBtn.getText(), "Logout");
+			//LogOutFromPortal();
 		}else {
 			Assert.assertEquals(errorMsg.getText(), "Warning: No match for E-Mail Address and/or Password.");
 			closeBtn.click();
@@ -51,6 +55,7 @@ public class LoginPage extends BaseTest{
 	
 	
 	public void LogOutFromPortal() {
+		myAccount.click();
 		logoutBtn.click();
 	}
 	
